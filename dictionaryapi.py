@@ -9,6 +9,8 @@ from scrapy.crawler import CrawlerProcess
 
 import os
 
+from datetime import datetime
+
 class DictionaryApiScraper(scrapy.Spider):
     
     name = 'dictionary-api-scraper'
@@ -95,4 +97,8 @@ if __name__ == "__main__":
     
     c.crawl(DictionaryApiScraper)
     
+    t1 = datetime.now()
     c.start()
+    t2 = datetime.now()
+    
+    print(f'total time : {(t2 - t1).seconds}')
