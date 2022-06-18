@@ -25,7 +25,7 @@ class DictionaryApiScraper(scrapy.Spider):
     
     def start_requests(self):
         
-        for word in list(self.db.scrape_speed_test.find({}).limit(1000)):
+        for word in list(self.db.scrape_speed_test.find({}).limit(1)):
             
             url = self.url + word["word"]
             
