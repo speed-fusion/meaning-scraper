@@ -46,7 +46,7 @@ class DictionaryApiScraper(scrapy.Spider):
             
             yield scrapy.Request(
                 url=url,
-                headers=self.headers
+                headers=self.headers,
                 method="GET",
                 meta= {
                     "word":word,
