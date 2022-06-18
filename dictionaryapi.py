@@ -50,7 +50,7 @@ class DictionaryApiScraper(scrapy.Spider):
                 method="GET",
                 meta= {
                     "word":word,
-                    # "proxy":self.proxy
+                    "proxy":self.proxy
                 },
                 callback=self.parse_response
             )
