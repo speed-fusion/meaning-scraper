@@ -42,7 +42,7 @@ class DictionaryApiScraper(scrapy.Spider):
     
     def start_requests(self):
         
-        for word in list(self.db.all_words.find({"status":-1}).limit(1)):
+        for word in list(self.db.all_words.find({"status":-1}).limit(1000)):
             
             url = self.url + word["word"]
             
