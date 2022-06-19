@@ -114,7 +114,8 @@ if __name__ == "__main__":
         'RETRY_TIMES':2,
         'RETRY_HTTP_CODES':[429],
         'DOWNLOAD_TIMEOUT':10,
-        'COOKIES_ENABLED':False
+        'COOKIES_ENABLED':False,
+        'LOG_LEVEL':"INFO"
         
     }
     
