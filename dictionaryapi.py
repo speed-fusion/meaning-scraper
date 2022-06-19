@@ -101,32 +101,32 @@ class DictionaryApiScraper(scrapy.Spider):
 
 
 if __name__ == "__main__":
-    while True:
-        settings = {
-            "ROBOTSTXT_OBEY":False,
-            "ITEM_PIPELINES":{
-                DictionaryApiPipeline:300
-            },
-            'CONCURRENT_REQUESTS_PER_DOMAIN':70,
-            'CONCURRENT_REQUESTS':75,
-            'CONCURRENT_ITEMS':200,
-            'RETRY_ENABLED':True,
-            'RETRY_TIMES':2,
-            'RETRY_HTTP_CODES':[429],
-            'DOWNLOAD_TIMEOUT':10,
-            'COOKIES_ENABLED':False,
-            'LOG_LEVEL':"INFO"
-            
-        }
+    
+    settings = {
+        "ROBOTSTXT_OBEY":False,
+        "ITEM_PIPELINES":{
+            DictionaryApiPipeline:300
+        },
+        'CONCURRENT_REQUESTS_PER_DOMAIN':70,
+        'CONCURRENT_REQUESTS':75,
+        'CONCURRENT_ITEMS':200,
+        'RETRY_ENABLED':True,
+        'RETRY_TIMES':2,
+        'RETRY_HTTP_CODES':[429],
+        'DOWNLOAD_TIMEOUT':10,
+        'COOKIES_ENABLED':False,
+        'LOG_LEVEL':"INFO"
         
-        c = CrawlerProcess(settings)
-        
-        c.crawl(DictionaryApiScraper)
-        
-        t1 = datetime.now()
-        
-        c.start()
-        
-        t2 = datetime.now()
-        
-        print(f'total time : {(t2 - t1).seconds}')
+    }
+    
+    c = CrawlerProcess(settings)
+    
+    c.crawl(DictionaryApiScraper)
+    
+    t1 = datetime.now()
+    
+    c.start()
+    
+    t2 = datetime.now()
+    
+    print(f'total time : {(t2 - t1).seconds}')
