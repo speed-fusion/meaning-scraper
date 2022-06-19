@@ -42,7 +42,7 @@ class DictionaryApiScraper(scrapy.Spider):
     
     def start_requests(self):
         
-        for word in list(self.db.all_words.find({"status":-1}).limit(1000)):
+        for word in list(self.db.all_words.find({"status":-1}).limit(2000)):
             
             url = self.url + word["word"]
             
@@ -101,13 +101,13 @@ if __name__ == "__main__":
         "ITEM_PIPELINES":{
             DictionaryApiPipeline:300
         },
-        'CONCURRENT_REQUESTS_PER_DOMAIN':75,
+        'CONCURRENT_REQUESTS_PER_DOMAIN':70,
         'CONCURRENT_REQUESTS':75,
         'CONCURRENT_ITEMS':200,
         'RETRY_ENABLED':True,
         'RETRY_TIMES':2,
         'RETRY_HTTP_CODES':[429],
-        'DOWNLOAD_TIMEOUT':8,
+        'DOWNLOAD_TIMEOUT':10,
         'COOKIES_ENABLED':False
         
     }
