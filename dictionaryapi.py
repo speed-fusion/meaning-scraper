@@ -11,6 +11,8 @@ import os
 
 from datetime import datetime
 
+from random_proxy import RandomProxy
+
 class DictionaryApiScraper(scrapy.Spider):
     
     name = 'dictionary-api-scraper'
@@ -21,7 +23,7 @@ class DictionaryApiScraper(scrapy.Spider):
     
     p = ParserResponse()
     
-    proxy = os.environ.get("PROXY",None)
+    rp = RandomProxy()
     
     headers = {
     'authority': 'api.dictionaryapi.dev',
@@ -50,7 +52,7 @@ class DictionaryApiScraper(scrapy.Spider):
                 method="GET",
                 meta= {
                     "word":word,
-                    "proxy":self.proxy
+                    "proxy":self.rp.get_random_proxy()
                 },
                 callback=self.parse_response
             )
