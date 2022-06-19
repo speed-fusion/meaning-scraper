@@ -12,4 +12,5 @@ class Database:
         client = pymongo.MongoClient(connection_uri)
         db = client[db_name]
         self.en_ar = db["en-ar-words"]
+        self.all_words = db["all-words"]
         self.scrape_speed_test = db["scrape-speed-test"]

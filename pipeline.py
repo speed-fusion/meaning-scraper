@@ -13,7 +13,7 @@ class DictionaryApiPipeline:
         
         data["status"] = item["status"]
         
-        self.db.scrape_speed_test.update_one(
+        self.db.all_words.update_one(
                 {"_id":id},
                 {
                     "$set":data

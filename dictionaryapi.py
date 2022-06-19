@@ -42,7 +42,7 @@ class DictionaryApiScraper(scrapy.Spider):
     
     def start_requests(self):
         
-        for word in list(self.db.scrape_speed_test.find({}).limit(1000)):
+        for word in list(self.db.all_words.find({"status":-1}).limit(1000)):
             
             url = self.url + word["word"]
             
@@ -86,7 +86,7 @@ class DictionaryApiScraper(scrapy.Spider):
             if status == False:
                 item["status"] = 0
             else:
-                item["status"] = 2
+                item["status"] = 1
                 
                 item["data"] = data
                 
@@ -105,9 +105,9 @@ if __name__ == "__main__":
         'CONCURRENT_REQUESTS':75,
         'CONCURRENT_ITEMS':200,
         'RETRY_ENABLED':True,
-        'RETRY_TIMES':3,
-        'RETRY_HTTP_CODES':[403,429],
-        'DOWNLOAD_TIMEOUT':10,
+        'RETRY_TIMES':2,
+        'RETRY_HTTP_CODES':[429],
+        'DOWNLOAD_TIMEOUT':8,
         'COOKIES_ENABLED':False
         
     }
@@ -117,7 +117,9 @@ if __name__ == "__main__":
     c.crawl(DictionaryApiScraper)
     
     t1 = datetime.now()
+    
     c.start()
+    
     t2 = datetime.now()
     
     print(f'total time : {(t2 - t1).seconds}')
