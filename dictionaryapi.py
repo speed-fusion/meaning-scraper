@@ -25,6 +25,8 @@ class DictionaryApiScraper(scrapy.Spider):
     
     rp = RandomProxy()
     
+    handle_httpstatus_list = [404]
+    
     headers = {
     'authority': 'api.dictionaryapi.dev',
     'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
@@ -73,22 +75,26 @@ class DictionaryApiScraper(scrapy.Spider):
         item["data"] = {}
         item["word"] = word
         
-        json_data = self.to_json(response)
-        
-        if json_data == None:
-            print(f'dictionary api does not have any data for word {word["word"]}')
-            
+        if response.status == 404:
             item["status"] = 0
-            
         else:
-            status,data = self.p.parse(json_data)
             
-            if status == False:
-                item["status"] = 0
-            else:
-                item["status"] = 1
+            json_data = self.to_json(response)
+            
+            if json_data == None:
+                print(f'dictionary api does not have any data for word {word["word"]}')
                 
-                item["data"] = data
+                item["status"] = 0
+                
+            else:
+                status,data = self.p.parse(json_data)
+                
+                if status == False:
+                    item["status"] = 0
+                else:
+                    item["status"] = 1
+                    
+                    item["data"] = data
                 
         yield item
         
