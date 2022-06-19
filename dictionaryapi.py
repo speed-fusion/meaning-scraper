@@ -101,12 +101,13 @@ if __name__ == "__main__":
         "ITEM_PIPELINES":{
             DictionaryApiPipeline:300
         },
-        'CONCURRENT_REQUESTS_PER_DOMAIN':40,
-        'CONCURRENT_REQUESTS':40,
+        'CONCURRENT_REQUESTS_PER_DOMAIN':75,
+        'CONCURRENT_REQUESTS':75,
         'CONCURRENT_ITEMS':200,
         'RETRY_ENABLED':True,
         'RETRY_TIMES':3,
-        'RETRY_HTTP_CODES':[403],
+        'RETRY_HTTP_CODES':[403,429],
+        'DOWNLOAD_TIMEOUT':10,
         'COOKIES_ENABLED':False
         
     }
