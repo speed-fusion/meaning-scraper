@@ -44,9 +44,9 @@ class DictionaryApiScraper(scrapy.Spider):
     
     def start_requests(self):
         
-        for word in list(self.db.all_words.find({"status":-1}).limit(2000)):
+        for word in list(self.db.all_words.find({"status":0}).limit(2000)):
             
-            url = self.url + word["word"]
+            url = self.url + word["w"]
             
             yield scrapy.Request(
                 url=url,
