@@ -71,12 +71,12 @@ class DictionaryApiScraper(scrapy.Spider):
         word = response.meta["word"]
         
         item = {}
-        item["status"] = 0
+        item["status"] = 2
         item["data"] = {}
         item["word"] = word
         
         if response.status == 404:
-            item["status"] = 0
+            item["status"] = 2
         else:
             
             json_data = self.to_json(response)
@@ -84,13 +84,13 @@ class DictionaryApiScraper(scrapy.Spider):
             if json_data == None:
                 print(f'dictionary api does not have any data for word {word["word"]}')
                 
-                item["status"] = 0
+                item["status"] = 2
                 
             else:
                 status,data = self.p.parse(json_data)
                 
                 if status == False:
-                    item["status"] = 0
+                    item["status"] = 2
                 else:
                     item["status"] = 1
                     
