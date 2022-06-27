@@ -7,10 +7,10 @@ import pymongo
 
 class Database:
     def __init__(self):
-        db_name = database
+        db_name = "dictionary"
         connection_uri = f'mongodb://{user}:{password}@{host}/?authSource=admin'
         client = pymongo.MongoClient(connection_uri)
         db = client[db_name]
         self.en_ar = db["en-ar-words"]
-        self.all_words = db["all-words"]
+        self.all_words = db["words"]
         self.scrape_speed_test = db["scrape-speed-test"]
